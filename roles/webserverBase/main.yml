@@ -1,0 +1,12 @@
+---
+- name: Playbook for linux server
+  become: yes
+  hosts: linuxServers
+  tasks:
+
+  - name: Install packages
+    apt:
+      pkg:
+        - vim
+        - ncdu
+      state: present
