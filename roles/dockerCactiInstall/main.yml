@@ -3,6 +3,10 @@
   become: yes
   hosts: linuxServers
   tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
     - name: Launch cacti docker container
       docker_container:
         name: cacti-server
