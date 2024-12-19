@@ -1,0 +1,8 @@
+- name: Copy compose file to destination
+  copy:
+  src: docker-compose.yml
+  dest: /home/xiam/
+- name: run docker-compose cacti
+  docker_compose:
+  project_src: /home/xiam/
+  state: present
