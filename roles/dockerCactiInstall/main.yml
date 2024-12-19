@@ -1,0 +1,28 @@
+---
+- name: Deploy Cacti on Linux servers
+  become: yes
+  hosts: linuxServers
+  tasks:
+    - name: Launch cacti docker container
+      docker_container:
+        name: cacti-server
+        image: "million12/mariadb"
+        pull: true
+        networks_cli_compatible: yes
+      services:
+        db:
+          container_name: db
+          image: million12/mariadb
+          environment:
+            MARIADB_USER: cactiuser
+            MARIADB_PASS: Xi@m2007!
+        cacti:
+          image: polinux/cacti
+          ports:
+            - "80:80"
+            - "81:81"
+            - "443:443"
+          environment:
+            DB_USER: cactiuser
+            DB_PASS: Xi@m2007!
+            DB_ADDRESS: db
